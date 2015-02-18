@@ -1,57 +1,97 @@
 <?php
 	session_start();
 	error_reporting(E_ALL);
-	
-
+	 
+ 
 	if(!isset($_SESSION['peptide']) && !isset($_SESSION['proteinType']) && !isset($_SESSION['evidenceLevel']) && !isset($_SESSION['taxonomy'])){
 		// set post into session
 		$_SESSION['peptide'] = $_POST['peptide'];
 		$_SESSION['proteinType'] = $_POST['proteinType'];
 		$_SESSION['evidenceLevel'] = $_POST['evidenceLevel'];
 		$_SESSION['taxonomy'] = $_POST["taxonomy"];
-
+ 
 		$peptide = $_SESSION['peptide'];
 		$proteinType = $_SESSION['proteinType'];
 		$evidenceLevel = $_SESSION['evidenceLevel'];
 		$taxonomy = $_SESSION["taxonomy"];
 	}
-
+ 
 		$peptide = $_SESSION['peptide'];
 		$proteinType = $_SESSION['proteinType'];
 		$evidenceLevel = $_SESSION['evidenceLevel'];
 		$taxonomy = $_SESSION["taxonomy"];
-
-		$dataFilter = new DataFilter();
-
+ 
+ 
+		$filter_arr = array(
+						"signal_peptide" => $peptide,
+						"protein_type" => $proteinType,
+						"evidence_level" => $evidenceLevel,
+						"taxonomic_lineage" => $taxonomy
+					);
+ 
+ 
+ 
+ 
+		$dataFilter = new DataFilter( $filter_arr );
+ 
 		$_SESSION['filter'] = $_GET['filter'];
-		// echo "<pre>";
-		// print_r($dataFilter->getOriginal());
-		// echo "</pre>";	
-		$msg = $dataFilter->getSelected($peptide, $proteinType, $evidenceLevel, $taxonomy);
-	// print_r($msg);
+		
+
 
 	class DataFilter{
-		public function __construct(){
-
+ 
+		protected $filter_arr = array();
+ 
+		public function __construct( $filter_arr ){
+			$this->filter_arr = $filter_arr;
 		}
-
-		public function getSelected($peptide, $proteinType, $evidenceLevel, $taxonomy){
-
-			return array(
-						"peptide" => $peptide,
-						"proteinType" => $proteinType,
-						"evidenceLevel" => $evidenceLevel,
-						"taxonomy" => $taxonomy
-						);
-		}
-		function fetchData(){
+ 
+ 
+		public function fetchData(){
 			include 'lib/PDO_connect.php';
-			$query = $db->prepare("SELECT * FROM sp_protein");
+ 
+			$query_str = "SELECT * FROM sp_protein".$this->buildFilter();
+
+
+			$query = $db->prepare( $query_str );
 			$query->execute();
 			$rows = $query->fetchAll();
-
-			// }
+ 
 			return $rows;
+		}
+ 
+		public function buildFilter() {
+
+			$str = " WHERE";
+
+
+			// modify filter to truthy show all records
+			foreach ($this->filter_arr as $colummname => $value) {
+				if( in_array( trim(strtolower($value)) , array('none', 'all')) )
+					unset($this->filter_arr[$colummname]);
+			}
+ 
+			$filter_cnt = count( $this->filter_arr );
+			$cnt = 1;
+
+
+ 
+			foreach ($this->filter_arr as $colummname => $value) {
+
+					$str .= " $colummname = '$value'";
+
+ 
+				if( $cnt < $filter_cnt )
+						$str .= " AND ";
+ 
+				$cnt++;
+			}
+
+
+ 			if( $str == " WHERE" );
+ 				return "";
+
+			return $str;
 		}
 }
 ?>

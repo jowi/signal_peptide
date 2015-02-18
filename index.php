@@ -13,7 +13,7 @@ session_destroy();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Project</title>
+    <title>Signal Peptide Profiler</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -65,13 +65,13 @@ session_destroy();
 	     <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Welcome to My Page
+                    Signal Peptide Profiler
                 </h1>
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-check"></i>First Container</h4>
+                        <h4><i class="fa fa-fw fa-check"></i>Getting Started</h4>
                     </div>
                     <div class="panel-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
@@ -82,7 +82,7 @@ session_destroy();
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-archive"></i> Second Container</h4>
+                        <h4><i class="fa fa-fw fa-archive"></i>Data Filter</h4>
                     </div>
                     <div class="panel-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
@@ -95,10 +95,10 @@ session_destroy();
         <!-- Features Section -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">About our project</h2>
+                <h2 class="page-header">About Signal Peptide Profiler</h2>
             </div>
             <div class="col-md-6">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+                <p>Providing a comprehensive and freely accessible resource of protein profiled according to desired results. Also providing graphs and up to date data for references and possible study.</p>
             </div>
         </div>
         <!-- Dialog box --->
